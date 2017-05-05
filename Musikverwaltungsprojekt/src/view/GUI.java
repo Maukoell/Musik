@@ -81,6 +81,7 @@ public class GUI extends JFrame {
 		JButton button4 = new JButton("Song Entfernen");
 		panel_1.add(button4);
 		
+		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
