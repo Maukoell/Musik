@@ -1,7 +1,6 @@
 package datenbankObjekte;
 
 import java.sql.Date;
-// halllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllooooooodgf
 /**
  * Diese Klasse definiert den Interpreten. </br>
  * Sie beinhaltet folgende Methoden: </br> </br>
@@ -25,7 +24,7 @@ import java.sql.Date;
  *  {@link #toString()} </br>
  * 
  * 
- * @author Mauricio Köll & Johannes Lindtner
+ * @author Mauricio Köll & Johannes Lindner
  * @version 1.0
  */
 
