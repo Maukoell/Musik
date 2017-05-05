@@ -85,6 +85,17 @@ public class GUI extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		JTree tree = new JTree();
+		tree.setModel(new DefaultTreeModel(
+			new DefaultMutableTreeNode("Test") {
+				{
+					DefaultMutableTreeNode node_1;
+					node_1 = new DefaultMutableTreeNode("Test1");
+						node_1.add(new DefaultMutableTreeNode("Test2"));
+						node_1.add(new DefaultMutableTreeNode("Test3"));
+					add(node_1);
+				}
+			}
+		));
 		scrollPane.setViewportView(tree);
 	}
 
