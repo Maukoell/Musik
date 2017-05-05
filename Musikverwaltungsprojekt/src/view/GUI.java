@@ -1,5 +1,6 @@
 package view;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -43,13 +44,14 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
-		setResizable(false);
+		Dimension d = new Dimension(793, 478);
+		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 621, 463);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
@@ -82,7 +84,7 @@ public class GUI extends JFrame {
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
+		contentPane.add(scrollPane);
 		
 		JTree tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
