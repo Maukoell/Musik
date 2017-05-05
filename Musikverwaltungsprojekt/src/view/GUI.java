@@ -98,6 +98,9 @@ public class GUI extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(tree);
+		
+		JButton btnMehrInformation = new JButton("Mehr Information");
+		contentPane.add(btnMehrInformation, BorderLayout.SOUTH);
 	}
 
 }
