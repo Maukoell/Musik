@@ -2,43 +2,32 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
+import javax.swing.border.EmptyBorder;
+
+import net.miginfocom.swing.MigLayout;
 
 public class CDDialog extends JDialog {
-
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			CDDialog dialog = new CDDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private GUI g;
 
 	/**
 	 * Create the dialog.
 	 */
-	public CDDialog() {
+	public CDDialog(GUI g) {
+		this.g = g;
 		setBounds(100, 100, 476, 233);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -81,6 +70,12 @@ public class CDDialog extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.setActionCommand("OK");
+				okButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}

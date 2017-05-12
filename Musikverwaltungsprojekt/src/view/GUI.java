@@ -3,8 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,6 +12,8 @@ import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+
+import listener.NewCDListener;
 
 public class GUI extends JFrame {
 
@@ -63,11 +63,7 @@ public class GUI extends JFrame {
 		panel.add(panel_2);
 		
 		JButton button1 = new JButton("CD Hinzuf\u00FCgen");
-		button1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
+		button1.addActionListener(new NewCDListener(this));
 		panel_2.add(button1);
 		
 		JButton button2 = new JButton("Song Hinzuf\u00FCgen");
