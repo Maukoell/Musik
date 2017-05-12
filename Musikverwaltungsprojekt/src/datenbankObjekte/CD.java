@@ -24,7 +24,7 @@ import java.sql.Date;
  *  {@link #toString()} </br>
  * 
  * 
- * @author Mauricio Köll & Johannes Lindtner
+ * @author Mauricio Köll & Johannes Lindner
  * @version 1.0
  */
 

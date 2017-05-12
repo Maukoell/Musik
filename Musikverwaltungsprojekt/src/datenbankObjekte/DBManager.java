@@ -28,7 +28,7 @@ import java.sql.SQLException;
  * {@link #deleteInterpretByID(Connection, int)} </br>
  * {@link #deleteSongByID(Connection, int)} </br>
  * 
- * @author Mauricio Köll & Johannes Lindtner
+ * @author Mauricio Köll & Johannes Lindner
  * @version 1.0
  */
 public class DBManager {
