@@ -8,20 +8,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-<<<<<<< HEAD
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-=======
->>>>>>> branch 'master' of https://github.com/Maukoell/Musik
 import javax.swing.JLabel;
-<<<<<<< HEAD
-import java.awt.Font;
-=======
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
->>>>>>> branch 'master' of https://github.com/Maukoell/Musik
 import net.miginfocom.swing.MigLayout;
 
 public class CDDialog extends JDialog {
@@ -41,18 +32,13 @@ public class CDDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-<<<<<<< HEAD
 		contentPanel.setLayout(new MigLayout("", "[259.00][263.00]", "[99.00][99.00][112.00]"));
 		contentPanel.setLayout(new MigLayout("", "[1px]", "[1px]"));
-=======
 		contentPanel.setLayout(new MigLayout("", "[259.00][263.00,grow]", "[99.00][99.00][99][]"));
->>>>>>> branch 'master' of https://github.com/Maukoell/Musik
 		{
 			JLabel lblTitel = new JLabel("Titel:");
 			lblTitel.setFont(new Font("Tahoma", Font.BOLD, 15));
-<<<<<<< HEAD
 			contentPanel.add(lblTitel, "cell 0 0,grow");
-=======
 			contentPanel.add(lblTitel, "cell 0 0,alignx center,aligny center");
 		}
 		{
@@ -79,7 +65,6 @@ public class CDDialog extends JDialog {
 			textField_2 = new JTextField();
 			textField_2.setColumns(20);
 			contentPanel.add(textField_2, "cell 1 2,alignx center,aligny center");
->>>>>>> branch 'master' of https://github.com/Maukoell/Musik
 		}
 		{
 			// Kommentar

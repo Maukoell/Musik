@@ -5,8 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
-import view.CDDialog;
-import view.GUI;
+import view.*;
 
 public class NewCDListener implements ActionListener {
 	private GUI g;
