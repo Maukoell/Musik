@@ -44,6 +44,7 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		// Kommentar 3
 		Dimension d = new Dimension(793, 478);
 		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

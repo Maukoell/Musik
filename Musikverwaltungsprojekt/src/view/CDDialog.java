@@ -64,6 +64,7 @@ public class CDDialog extends JDialog {
 			contentPanel.add(textField_2, "cell 1 2,alignx center,aligny center");
 		}
 		{
+			// Kommentar
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
