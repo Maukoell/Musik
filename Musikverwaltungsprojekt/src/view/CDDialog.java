@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import net.miginfocom.swing.MigLayout;
 
 public class CDDialog extends JDialog {
 
@@ -37,10 +37,11 @@ public class CDDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[259.00][263.00]", "[99.00][99.00][112.00]"));
+		contentPanel.setLayout(new MigLayout("", "[1px]", "[1px]"));
 		{
 			JLabel lblTitel = new JLabel("Titel:");
 			lblTitel.setFont(new Font("Tahoma", Font.BOLD, 15));
-			contentPanel.add(lblTitel, "cell 0 0,alignx center,aligny center");
+			contentPanel.add(lblTitel, "cell 0 0,grow");
 		}
 		{
 			JPanel buttonPane = new JPanel();
