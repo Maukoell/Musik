@@ -9,7 +9,7 @@ import java.sql.Date;
  * {@link #CD(int, String, String, Date)} </br> </br>
  * 
  * Getters: </br>
- * {@link #getCDID()} </br>
+ * {@link #getCDID()}     </br>
  * {@link #getName()} </br>
  * {@link #getVerlag()} </br>
  * {@link #getErschDatum()} </br> </br>
