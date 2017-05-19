@@ -13,6 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import datenbankObjekte.CD;
 import net.miginfocom.swing.MigLayout;
 
@@ -63,10 +67,17 @@ public class CDDialog extends JDialog {
 			contentPanel.add(lblErscheinungsdatum, "cell 0 2,alignx center,aligny center");
 		}
 		{
-			textField_2 = new JTextField();
+			
+			UtilDateModel model = new UtilDateModel();
+			JDatePanelImpl datePanel = new JDatePanelImpl(model, null);
+			JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, null);
+			
+			contentPanel.add(datePicker, "cell 1 2,alignx center,aligny center");
+			
+			/*textField_2 = new JTextField();
 			textField_2.setColumns(20);
 			contentPanel.add(textField_2, "cell 1 2,alignx center,aligny center");
-		}
+		*/}
 		{
 			// Kommentar
 			JPanel buttonPane = new JPanel();
