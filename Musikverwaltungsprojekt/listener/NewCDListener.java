@@ -19,7 +19,6 @@ public class NewCDListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			// Kommentar 2
 			CDDialog dialog = new CDDialog(g);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);

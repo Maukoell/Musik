@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import datenbankObjekte.CD;
 import net.miginfocom.swing.MigLayout;
 
 public class CDDialog extends JDialog {
@@ -77,7 +78,7 @@ public class CDDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+						CD c = new CD(textField, textField_1, date);
 					}
 				});
 				buttonPane.add(okButton);
