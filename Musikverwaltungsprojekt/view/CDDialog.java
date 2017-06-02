@@ -5,9 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,6 +27,7 @@ public class CDDialog extends JDialog {
 	private JTextField textField_1;
 	private JTextField txtDdmmyyyy;
 	private GUI g;
+	private int i;
 
 	/**
 	 * Create the dialog.
@@ -67,7 +69,7 @@ public class CDDialog extends JDialog {
 		}
 		{
 			txtDdmmyyyy = new JTextField();
-			txtDdmmyyyy.setText("dd-mm-yyyy");
+			txtDdmmyyyy.setText("dd.mm.yyyy");
 			txtDdmmyyyy.setColumns(20);
 			contentPanel.add(txtDdmmyyyy, "cell 1 2,alignx center,aligny center");
 		}
@@ -82,7 +84,7 @@ public class CDDialog extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+						SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
 						Date d = null;
 						try {
 							d = (Date) format.parse(txtDdmmyyyy.getText());
@@ -90,7 +92,10 @@ public class CDDialog extends JDialog {
 							e1.printStackTrace();
 						}
 						CD c = new CD(textField.getText(), textField_1.getText(), d );
-						
+						ArrayList<CD> cdList = g.getCdList();
+						cdList.add(c);
+						System.out.println(cdList.get(i).toString());
+						dispose();
 					}
 				});
 				buttonPane.add(okButton);
