@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import datenbankObjekte.CD;
+import datenbankObjekte.Interpret;
+import datenbankObjekte.Song;
 import listener.NewCDListener;
 
 public class GUI extends JFrame {
@@ -22,6 +26,10 @@ public class GUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private ArrayList<CD> cdList = new ArrayList<>();
+	private ArrayList<Interpret> interpretList = new ArrayList<>();
+	private ArrayList<Song> songList = new ArrayList<>();
+	
 
 	/**
 	 * Launch the application.
@@ -100,4 +108,27 @@ public class GUI extends JFrame {
 		contentPane.add(btnMehrInformation, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * @return the cdList
+	 */
+	public ArrayList<CD> getCdList() {
+		return cdList;
+	}
+
+	/**
+	 * @return the interpretList
+	 */
+	public ArrayList<Interpret> getInterpretList() {
+		return interpretList;
+	}
+
+	/**
+	 * @return the song
+	 */
+	public ArrayList<Song> getSongList() {
+		return songList;
+	}
+
+	
+	
 }
