@@ -47,6 +47,11 @@ public class CD {
 			this.verlag = verlag;
 			this.erschDatum = erschDatum;
 		}
+		public CD(String name, String verlag, Date erschDatum) {
+			this.name = name;
+			this.verlag = verlag;
+			this.erschDatum = erschDatum;
+		}
 		/**
 		 * @return the cDID
 		 */
