@@ -5,12 +5,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,30 +17,33 @@ import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
 import net.miginfocom.swing.MigLayout;
 
-public class CDDialog extends JDialog {
+public class SongDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField txtDdmmyyyy;
 	private GUI g;
+	private JTree tree;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Create the dialog.
 	 */
-	public CDDialog(GUI g) {
+	public SongDialog(GUI g) {
 		this.g = g;
+		tree = g.getTree();
 		setBounds(100, 100, 476, 233);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[259.00][263.00]", "[99.00][99.00][112.00]"));
-		contentPanel.setLayout(new MigLayout("", "[1px]", "[1px]"));
-		contentPanel.setLayout(new MigLayout("", "[259.00][263.00,grow]", "[99.00][99.00][99][]"));
+		contentPanel.setLayout(new MigLayout("", "[259.00][263.00,grow]", "[99.00][99.00][112.00][]"));
 		{
 			JLabel lblTitel = new JLabel("Titel:");
 			lblTitel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -51,66 +52,72 @@ public class CDDialog extends JDialog {
 		}
 		{
 			textField = new JTextField();
-			contentPanel.add(textField, "cell 1 0,alignx center,aligny center");
+			contentPanel.add(textField, "cell 1 0");
 			textField.setColumns(20);
 		}
 		{
-			JLabel lblVerlag = new JLabel("Verlag:");
+			JLabel lblVerlag = new JLabel("Dauer:");
 			lblVerlag.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblVerlag, "cell 0 1,alignx center,aligny center");
 		}
 		{
 			textField_1 = new JTextField();
 			textField_1.setColumns(20);
-			contentPanel.add(textField_1, "cell 1 1,alignx center,aligny center");
+			contentPanel.add(textField_1, "cell 1 1");
 		}
 		{
-			JLabel lblErscheinungsdatum = new JLabel("Erscheinungsdatum:");
+			JLabel lblErscheinungsdatum = new JLabel("CD:");
 			lblErscheinungsdatum.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblErscheinungsdatum, "cell 0 2,alignx center,aligny center");
 		}
 		{
-			txtDdmmyyyy = new JTextField();
-			txtDdmmyyyy.setText("dd.mm.yyyy");
-			txtDdmmyyyy.setColumns(20);
-			contentPanel.add(txtDdmmyyyy, "cell 1 2,alignx center,aligny center");
+			ArrayList<CD> cdList = g.getCdList();
+			ArrayList<String> ls = new ArrayList<>();
+			
+			for (int i = 0; i < cdList.size(); i++) {
+				CD cd = cdList.get(i);
+				String cds = cd.getName();
+				ls.add(cds);
+			}
+			String[] s = null;
+			s = ls.toArray(new String[0]); 
+			
+			comboBox = new JComboBox<String>(s);
+			
+			contentPanel.add(comboBox, "cell 1 2,growx");
 		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Hinzufügen");
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-						Date d = null;
-						try {
-							d = (Date) format.parse(txtDdmmyyyy.getText());
-						} catch (ParseException e1) {
-							e1.printStackTrace();
+						String s = (String) comboBox.getSelectedItem();
+						TreeNode dmtn = null;
+						DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();
+						TreePath[] tp = tree.getSelectionPaths();
+						for (int i = 0; i < tp.length; i++) {
+							for (int j = 0; j < tp[i].getPathCount(); j++) {
+								if (s == tp[i].getPathComponent(j)) {
+									dmtn = (TreeNode) tp[i].getPathComponent(j);
+									dmtn = dmtn.getChildAt(0);
+									dmtn = dmtn.getParent();
+								}
+							}
 						}
-						CD c = new CD(textField.getText(), textField_1.getText(), d );
-						ArrayList<CD> cdList = g.getCdList();
-						cdList.add(c);
-						
-						String[] s = new String[cdList.size()];
-						for (int i = 0; i < cdList.size(); i++) {
-							s[i] = cdList.get(i).getName();
-						}
-						JTree tree = new JTree(s);
-						JTree tree1 = g.getTree();
-						tree1.setModel(tree.getModel());
-						dispose();
+						DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(textField.getText());
+						dtm.insertNodeInto(newNode, (MutableTreeNode) dmtn, dtm.getChildCount(dmtn));
 					}
 				});
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Abbrechen");
 				cancelButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

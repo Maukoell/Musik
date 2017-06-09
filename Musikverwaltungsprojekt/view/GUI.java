@@ -17,7 +17,10 @@ import javax.swing.tree.DefaultTreeModel;
 import datenbankObjekte.CD;
 import datenbankObjekte.Interpret;
 import datenbankObjekte.Song;
+import listener.CDDeleteListener;
 import listener.NewCDListener;
+import listener.NewSongListener;
+import listener.SongDeleteListener;
 
 public class GUI extends JFrame {
 
@@ -26,6 +29,7 @@ public class GUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTree tree;
 	private ArrayList<CD> cdList = new ArrayList<>();
 	private ArrayList<Interpret> interpretList = new ArrayList<>();
 	private ArrayList<Song> songList = new ArrayList<>();
@@ -51,6 +55,7 @@ public class GUI extends JFrame {
 	 * 
 	 * Create the frame.
 	 */
+	@SuppressWarnings("serial")
 	public GUI() {
 		// Kommentar 3
 		Dimension d = new Dimension(793, 478);
@@ -76,29 +81,28 @@ public class GUI extends JFrame {
 		panel_2.add(button1);
 		
 		JButton button2 = new JButton("Song Hinzuf\u00FCgen");
+		button2.addActionListener(new NewSongListener(this));
 		panel_2.add(button2);
 		
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
 		
 		JButton button3 = new JButton("CD Entfernen");
+		button3.addActionListener(new CDDeleteListener(this));
 		panel_1.add(button3);
 		
 		JButton button4 = new JButton("Song Entfernen");
+		button4.addActionListener(new SongDeleteListener(this));
 		panel_1.add(button4);
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane);
 		
-		JTree tree = new JTree();
+		tree = new JTree();
 		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Test") {
+			new DefaultMutableTreeNode("CDs") {
 				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Test1");
-						node_1.add(new DefaultMutableTreeNode("Test2"));
-						node_1.add(new DefaultMutableTreeNode("Test3"));
 				}
 			}
 		));
@@ -106,6 +110,13 @@ public class GUI extends JFrame {
 		
 		JButton btnMehrInformation = new JButton("Mehr Information");
 		contentPane.add(btnMehrInformation, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * @return the tree
+	 */
+	public JTree getTree() {
+		return tree;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package datenbankObjekte;
 
-import java.sql.Date;
+import java.util.Date;
 /**
  * Diese Klasse definiert den Interpreten. </br>
  * Sie beinhaltet folgende Methoden: </br> </br>
@@ -47,10 +47,10 @@ public class CD {
 			this.verlag = verlag;
 			this.erschDatum = erschDatum;
 		}
-		public CD(String name, String verlag, Date erschDatum) {
+		public CD(String name, String verlag, Date d) {
 			this.name = name;
 			this.verlag = verlag;
-			this.erschDatum = erschDatum;
+			this.erschDatum = d;
 		}
 		/**
 		 * @return the cDID
