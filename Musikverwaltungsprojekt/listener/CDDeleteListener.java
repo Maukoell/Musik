@@ -24,7 +24,7 @@ private GUI g;
 		DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();
 		TreePath tp = tree.getSelectionPath();
 		
-		DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getPathComponent(0);
+		DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
 		dtm.removeNodeFromParent(dmtn);
 	}
 	
