@@ -50,7 +50,7 @@ public class SongDialog extends JDialog {
 			contentPanel.add(lblTitel, "cell 0 0,grow");
 			contentPanel.add(lblTitel, "cell 0 0,alignx center,aligny center");
 		}
-		{
+		{  
 			textField = new JTextField();
 			contentPanel.add(textField, "cell 1 0");
 			textField.setColumns(20);
