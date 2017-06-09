@@ -113,8 +113,7 @@ public class GUI extends JFrame {
 		contentPane.add(btnMehrInformation, BorderLayout.SOUTH);
 	}
 
-	@SuppressWarnings("unused")
-	private TreePath find(DefaultMutableTreeNode root, String s) {
+	public TreePath find(DefaultMutableTreeNode root, String s) {
 	    @SuppressWarnings("unchecked")
 	    Enumeration<DefaultMutableTreeNode> e = root.depthFirstEnumeration();
 	    while (e.hasMoreElements()) {

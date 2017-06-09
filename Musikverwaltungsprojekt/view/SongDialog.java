@@ -15,7 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
 import net.miginfocom.swing.MigLayout;
@@ -28,6 +31,7 @@ public class SongDialog extends JDialog {
 	private GUI g;
 	private JTree tree;
 	private JComboBox<String> comboBox;
+	private JTextField textField_2;
 
 	/**
 	 * Create the dialog.
@@ -39,9 +43,9 @@ public class SongDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[259.00][263.00,grow]", "[99.00][99.00][112.00][]"));
+		contentPanel.setLayout(new MigLayout("", "[259.00][263.00,grow]", "[99.00][99.00][112.00][][]"));
 		{
-			JLabel lblTitel = new JLabel("Dauer:");
+			JLabel lblTitel = new JLabel("Name:");
 			lblTitel.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblTitel, "cell 0 0,grow");
 			contentPanel.add(lblTitel, "cell 0 0,alignx center,aligny center");
@@ -52,7 +56,7 @@ public class SongDialog extends JDialog {
 			textField.setColumns(20);
 		}
 		{
-			JLabel lblVerlag = new JLabel("Interpret:");
+			JLabel lblVerlag = new JLabel("Dauer:");
 			lblVerlag.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblVerlag, "cell 0 1,alignx center,aligny center");
 		}
@@ -62,7 +66,7 @@ public class SongDialog extends JDialog {
 			contentPanel.add(textField_1, "cell 1 1");
 		}
 		{
-			JLabel lblErscheinungsdatum = new JLabel("Name:");
+			JLabel lblErscheinungsdatum = new JLabel("CD:");
 			lblErscheinungsdatum.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblErscheinungsdatum, "cell 0 2,alignx center,aligny center");
 		}
@@ -82,6 +86,16 @@ public class SongDialog extends JDialog {
 			contentPanel.add(comboBox, "cell 1 2,growx");
 		}
 		{
+			JLabel lblInterpret = new JLabel("Interpret:");
+			lblInterpret.setFont(new Font("Tahoma", Font.BOLD, 15));
+			contentPanel.add(lblInterpret, "cell 0 3,alignx center,aligny center");
+		}
+		{
+			textField_2 = new JTextField();
+			contentPanel.add(textField_2, "cell 1 3");
+			textField_2.setColumns(20);
+		}
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -92,9 +106,13 @@ public class SongDialog extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String s = (String) comboBox.getSelectedItem();
-						
-						TreeModel m = tree.getModel();
-						
+						TreePath tp = g.find((DefaultMutableTreeNode) tree.getModel().getRoot(), s);
+						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
+						DefaultTreeModel tm = (DefaultTreeModel) tree.getModel();
+						DefaultMutableTreeNode dmtn1 = new DefaultMutableTreeNode(textField.getText());
+						dmtn.setAllowsChildren(true);
+						tm.insertNodeInto(dmtn1, dmtn, 0);
+						dispose();
 						
 					}
 				});
