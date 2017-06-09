@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
 import datenbankObjekte.Interpret;
@@ -25,7 +27,6 @@ import listener.SongDeleteListener;
 public class GUI extends JFrame {
 
 	/**
-	 * Test
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -57,7 +58,6 @@ public class GUI extends JFrame {
 	 */
 	@SuppressWarnings("serial")
 	public GUI() {
-		// Kommentar 3
 		Dimension d = new Dimension(793, 478);
 		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,6 +100,7 @@ public class GUI extends JFrame {
 		contentPane.add(scrollPane);
 		
 		tree = new JTree();
+		tree.setRootVisible(false);
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("CDs") {
 				{
@@ -112,6 +113,19 @@ public class GUI extends JFrame {
 		contentPane.add(btnMehrInformation, BorderLayout.SOUTH);
 	}
 
+	@SuppressWarnings("unused")
+	private TreePath find(DefaultMutableTreeNode root, String s) {
+	    @SuppressWarnings("unchecked")
+	    Enumeration<DefaultMutableTreeNode> e = root.depthFirstEnumeration();
+	    while (e.hasMoreElements()) {
+	        DefaultMutableTreeNode node = e.nextElement();
+	        if (node.toString().equalsIgnoreCase(s)) {
+	            return new TreePath(node.getPath());
+	        }
+	    }
+	    return null;
+	}
+	
 	/**
 	 * @return the tree
 	 */

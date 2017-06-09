@@ -15,11 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeModel;
 
 import datenbankObjekte.CD;
 import net.miginfocom.swing.MigLayout;
@@ -83,7 +79,6 @@ public class SongDialog extends JDialog {
 			s = ls.toArray(new String[0]); 
 			
 			comboBox = new JComboBox<String>(s);
-			
 			contentPanel.add(comboBox, "cell 1 2,growx");
 		}
 		{
@@ -97,20 +92,10 @@ public class SongDialog extends JDialog {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						String s = (String) comboBox.getSelectedItem();
-						TreeNode dmtn = null;
-						DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();
-						TreePath[] tp = tree.getSelectionPaths();
-						for (int i = 0; i < tp.length; i++) {
-							for (int j = 0; j < tp[i].getPathCount(); j++) {
-								if (s == tp[i].getPathComponent(j)) {
-									dmtn = (TreeNode) tp[i].getPathComponent(j);
-									dmtn = dmtn.getChildAt(0);
-									dmtn = dmtn.getParent();
-								}
-							}
-						}
-						DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(textField.getText());
-						dtm.insertNodeInto(newNode, (MutableTreeNode) dmtn, dtm.getChildCount(dmtn));
+						
+						TreeModel m = tree.getModel();
+						
+						
 					}
 				});
 				buttonPane.add(okButton);
