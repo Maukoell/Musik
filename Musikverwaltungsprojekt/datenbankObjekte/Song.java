@@ -21,6 +21,12 @@ public class Song {
 		this.Interpret = interpret;
 		this.cd = cd;
 	}
+	public Song(String string, double parseDouble, Interpret i, CD cd2) {
+			songName = string;
+				dauer = parseDouble;
+				Interpret = i;
+						cd = cd2;
+	}
 	/**
 	 * @return the songID
 	 */

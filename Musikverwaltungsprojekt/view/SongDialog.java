@@ -27,13 +27,16 @@ import net.miginfocom.swing.MigLayout;
 public class SongDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tf_name;
+	private JTextField tf_dauer;
 	private GUI g;
+	private ArrayList<CD> cdList = g.getCdList();
+	private ArrayList<Song> songList = g.getSongList();
 	private JTree tree;
 	private JComboBox<String> comboBox;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField tf_iVorname;
+	private JTextField tf_iNachname;
+	private CD cd;
 
 	/**
 	 * Create the dialog.
@@ -53,9 +56,9 @@ public class SongDialog extends JDialog {
 			contentPanel.add(lblTitel, "cell 0 0,alignx center,aligny center");
 		}
 		{  
-			textField = new JTextField();
-			contentPanel.add(textField, "cell 1 0");
-			textField.setColumns(20);
+			tf_name = new JTextField();
+			contentPanel.add(tf_name, "cell 1 0");
+			tf_name.setColumns(20);
 		}
 		{
 			JLabel lblVerlag = new JLabel("Dauer:");
@@ -63,9 +66,9 @@ public class SongDialog extends JDialog {
 			contentPanel.add(lblVerlag, "cell 0 1,alignx center,aligny center");
 		}
 		{
-			textField_1 = new JTextField();
-			textField_1.setColumns(20);
-			contentPanel.add(textField_1, "cell 1 1");
+			tf_dauer = new JTextField();
+			tf_dauer.setColumns(20);
+			contentPanel.add(tf_dauer, "cell 1 1");
 		}
 		{
 			JLabel lblErscheinungsdatum = new JLabel("CD:");
@@ -84,7 +87,7 @@ public class SongDialog extends JDialog {
 			String[] s = null;
 			s = ls.toArray(new String[0]); 
 			
-			comboBox = new JComboBox<String>(s);
+	//		comboBox = new JComboBox<String>(s);
 			contentPanel.add(comboBox, "cell 1 2,growx");
 		}
 		{
@@ -93,18 +96,19 @@ public class SongDialog extends JDialog {
 			contentPanel.add(lblInterpret, "cell 0 3,alignx center,aligny center");
 		}
 		{
-			textField_2 = new JTextField();
-			contentPanel.add(textField_2, "cell 1 3");
-			textField_2.setColumns(20);
+			tf_iVorname = new JTextField();
+			contentPanel.add(tf_iVorname, "cell 1 3");
+			tf_iVorname.setColumns(20);
 		}
 		{
 			JLabel lblInterpretNachname = new JLabel("Interpret Nachname:");
-			contentPanel.add(lblInterpretNachname, "cell 0 4,alignx trailing");
+			lblInterpretNachname.setFont(new Font("Tahoma", Font.BOLD, 15));
+			contentPanel.add(lblInterpretNachname, "cell 0 4,alignx center,aligny center");
 		}
 		{
-			textField_3 = new JTextField();
-			contentPanel.add(textField_3, "cell 1 4,growx");
-			textField_3.setColumns(10);
+			tf_iNachname = new JTextField();
+			contentPanel.add(tf_iNachname, "cell 1 4,growx");
+			tf_iNachname.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -120,11 +124,18 @@ public class SongDialog extends JDialog {
 						TreePath tp = g.find((DefaultMutableTreeNode) tree.getModel().getRoot(), s);
 						DefaultMutableTreeNode dmtn = (DefaultMutableTreeNode) tp.getLastPathComponent();
 						DefaultTreeModel tm = (DefaultTreeModel) tree.getModel();
-						DefaultMutableTreeNode dmtn1 = new DefaultMutableTreeNode(textField.getText());
+						DefaultMutableTreeNode dmtn1 = new DefaultMutableTreeNode(tf_name.getText());
 						dmtn.setAllowsChildren(true);
 						tm.insertNodeInto(dmtn1, dmtn, 0);
-					//	Interpret i = new Interpret(nname, vname);
-					//	Song s = new Song(s, Double.parseDouble(textField_1.getText()), i, );
+						for (int i = 0; i < cdList.size(); i++) {
+							CD c = cdList.get(i);
+							if (c.getName() == s) {
+								cd = c;
+							}
+						}
+						Interpret i = new Interpret(tf_iNachname.getText(), tf_iVorname.getText());
+						Song s1 = new Song(tf_name.getText(), Double.parseDouble(tf_name.getText()), i, cd);
+						songList.add(s1);
 						dispose();
 					}
 				});
