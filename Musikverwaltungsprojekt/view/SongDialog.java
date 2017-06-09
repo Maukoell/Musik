@@ -17,10 +17,11 @@ import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
+import datenbankObjekte.Interpret;
+import datenbankObjekte.Song;
 import net.miginfocom.swing.MigLayout;
 
 public class SongDialog extends JDialog {
@@ -112,8 +113,9 @@ public class SongDialog extends JDialog {
 						DefaultMutableTreeNode dmtn1 = new DefaultMutableTreeNode(textField.getText());
 						dmtn.setAllowsChildren(true);
 						tm.insertNodeInto(dmtn1, dmtn, 0);
+					//	Interpret i = new Interpret(nname, vname);
+					//	Song s = new Song(s, Double.parseDouble(textField_1.getText()), i, );
 						dispose();
-						
 					}
 				});
 				buttonPane.add(okButton);
