@@ -103,7 +103,6 @@ public class CDDialog extends JDialog {
 						JTree tree = new JTree(s);
 						JTree tree1 = g.getTree();
 						tree1.setModel(tree.getModel());
-						
 						dispose();
 					}
 				});

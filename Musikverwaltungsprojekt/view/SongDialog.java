@@ -5,22 +5,24 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.border.EmptyBorder;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JComboBox;
 
 public class SongDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -28,12 +30,15 @@ public class SongDialog extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 	private GUI g;
+	private JTree tree;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Create the dialog.
 	 */
 	public SongDialog(GUI g) {
 		this.g = g;
+		tree = g.getTree();
 		setBounds(100, 100, 476, 233);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,7 +82,8 @@ public class SongDialog extends JDialog {
 			String[] s = null;
 			s = ls.toArray(new String[0]); 
 			
-			JComboBox<String> comboBox = new JComboBox<String>(s);
+			comboBox = new JComboBox<String>(s);
+			
 			contentPanel.add(comboBox, "cell 1 2,growx");
 		}
 		{
@@ -85,21 +91,33 @@ public class SongDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				JButton okButton = new JButton("Hinzufügen");
 				okButton.setActionCommand("OK");
 				okButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
-						
-						dispose();
+						String s = (String) comboBox.getSelectedItem();
+						TreeNode dmtn = null;
+						DefaultTreeModel dtm = (DefaultTreeModel) tree.getModel();
+						TreePath[] tp = tree.getSelectionPaths();
+						for (int i = 0; i < tp.length; i++) {
+							for (int j = 0; j < tp[i].getPathCount(); j++) {
+								if (s == tp[i].getPathComponent(j)) {
+									dmtn = (TreeNode) tp[i].getPathComponent(j);
+									dmtn = dmtn.getChildAt(0);
+									dmtn = dmtn.getParent();
+								}
+							}
+						}
+						DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(textField.getText());
+						dtm.insertNodeInto(newNode, (MutableTreeNode) dmtn, dtm.getChildCount(dmtn));
 					}
 				});
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
+				JButton cancelButton = new JButton("Abbrechen");
 				cancelButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
