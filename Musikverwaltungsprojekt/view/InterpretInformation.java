@@ -58,9 +58,9 @@ public class InterpretInformation extends JFrame {
 		contentPane.add(panel_4, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_4 = new GridBagLayout();
 		gbl_panel_4.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_4.rowHeights = new int[]{0, 0, 0, 0};
+		gbl_panel_4.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_panel_4.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_4.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_4.setLayout(gbl_panel_4);
 		
 		JLabel lblNachname = new JLabel("Nachname:");
@@ -79,13 +79,14 @@ public class InterpretInformation extends JFrame {
 		
 		JLabel lblVorname = new JLabel("Vorname:");
 		GridBagConstraints gbc_lblVorname = new GridBagConstraints();
-		gbc_lblVorname.insets = new Insets(0, 0, 0, 5);
+		gbc_lblVorname.insets = new Insets(0, 0, 5, 5);
 		gbc_lblVorname.gridx = 2;
 		gbc_lblVorname.gridy = 2;
 		panel_4.add(lblVorname, gbc_lblVorname);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_1.gridx = 7;
 		gbc_lblNewLabel_1.gridy = 2;
 		panel_4.add(lblNewLabel_1, gbc_lblNewLabel_1);

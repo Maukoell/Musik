@@ -19,10 +19,9 @@ import javax.swing.tree.TreePath;
 import datenbankObjekte.CD;
 import datenbankObjekte.Interpret;
 import datenbankObjekte.Song;
-import listener.CDDeleteListener;
 import listener.NewCDListener;
 import listener.NewSongListener;
-import listener.SongDeleteListener;
+import listener.DeleteListener;
 
 public class GUI extends JFrame {
 
@@ -87,12 +86,8 @@ public class GUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
 		
-		JButton button3 = new JButton("CD Entfernen");
-		button3.addActionListener(new CDDeleteListener(this));
-		panel_1.add(button3);
-		
-		JButton button4 = new JButton("Song Entfernen");
-		button4.addActionListener(new SongDeleteListener(this));
+		JButton button4 = new JButton("Entfernen");
+		button4.addActionListener(new DeleteListener(this));
 		panel_1.add(button4);
 		
 		
