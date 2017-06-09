@@ -45,7 +45,7 @@ public class SongDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new MigLayout("", "[259.00][263.00,grow]", "[99.00][99.00][112.00][]"));
 		{
-			JLabel lblTitel = new JLabel("Titel:");
+			JLabel lblTitel = new JLabel("Dauer:");
 			lblTitel.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblTitel, "cell 0 0,grow");
 			contentPanel.add(lblTitel, "cell 0 0,alignx center,aligny center");
@@ -56,7 +56,7 @@ public class SongDialog extends JDialog {
 			textField.setColumns(20);
 		}
 		{
-			JLabel lblVerlag = new JLabel("Dauer:");
+			JLabel lblVerlag = new JLabel("Interpret:");
 			lblVerlag.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblVerlag, "cell 0 1,alignx center,aligny center");
 		}
@@ -66,7 +66,7 @@ public class SongDialog extends JDialog {
 			contentPanel.add(textField_1, "cell 1 1");
 		}
 		{
-			JLabel lblErscheinungsdatum = new JLabel("CD:");
+			JLabel lblErscheinungsdatum = new JLabel("Name:");
 			lblErscheinungsdatum.setFont(new Font("Tahoma", Font.BOLD, 15));
 			contentPanel.add(lblErscheinungsdatum, "cell 0 2,alignx center,aligny center");
 		}
