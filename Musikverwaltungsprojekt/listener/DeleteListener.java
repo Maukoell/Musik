@@ -10,6 +10,14 @@ import javax.swing.tree.TreePath;
 
 import view.GUI;
 
+/**
+ * Diese Klasse dient zum Löschen eines Eintrages in dem JTree.
+ * 
+ * @author Mauricio Köll & Johannes Lindner
+ * @version 1.0
+ *
+ */
+
 public class DeleteListener implements ActionListener {
 
 	private GUI g;

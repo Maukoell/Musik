@@ -7,6 +7,13 @@ import javax.swing.JDialog;
 
 import view.*;
 
+/**
+ * Diese Klasse dient zum Öffnen der CDDialog Klasse.
+ * 
+ * @author Mauricio Köll & Johannes Lindner
+ * @version 1.0
+ *  */
+
 public class NewCDListener implements ActionListener {
 	private GUI g;
 	

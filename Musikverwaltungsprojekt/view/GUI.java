@@ -24,6 +24,13 @@ import listener.DeleteListener;
 import listener.NewCDListener;
 import listener.NewSongListener;
 
+/**
+ * Dies ist die Hauptklasse des Programms und gleichzeitig die GUI des Programms.
+ * 
+ * @author Mauricio Köll & Johannes Lindner
+ * @version 1.0
+ */
+
 public class GUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;

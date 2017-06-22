@@ -25,6 +25,13 @@ import datenbankObjekte.CD;
 import datenbankObjekte.DBManager;
 import net.miginfocom.swing.MigLayout;
 
+ /**
+  *  Diese Klasse dient zum Hinzufügen einer CD in die Datenbank und in den JTree.
+  *  
+ * @author Mauricio Köll & Johannes Lindner
+ * @version 1.0
+  */
+
 public class CDDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();

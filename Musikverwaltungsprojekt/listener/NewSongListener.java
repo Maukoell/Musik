@@ -8,6 +8,13 @@ import javax.swing.JDialog;
 import view.GUI;
 import view.SongDialog;
 
+/**
+ * Diese Klasse dient zum Ausführen der SongDialog Klasse.
+ * 
+ * @author Mauricio Köll & Johannes Lindner
+ * @version 1.0
+ */
+
 public class NewSongListener implements ActionListener {
 	
 	private GUI g;
