@@ -1,8 +1,10 @@
 package view;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -25,7 +27,8 @@ import listener.NewCDListener;
 import listener.NewSongListener;
 
 /**
- * Dies ist die Hauptklasse des Programms und gleichzeitig die GUI des Programms.
+ * Dies ist die Hauptklasse des Programms und gleichzeitig die GUI des
+ * Programms.
  * 
  * @author Mauricio Köll & Johannes Lindner
  * @version 1.0
@@ -40,7 +43,6 @@ public class GUI extends JFrame {
 	private ArrayList<Interpret> interpretList = new ArrayList<>();
 	private ArrayList<Song> songList = new ArrayList<>();
 	private DBManager dbm = new DBManager();
-	
 
 	/**
 	 * Launch the application.
@@ -64,6 +66,7 @@ public class GUI extends JFrame {
 	 */
 	@SuppressWarnings("serial")
 	public GUI() {
+		update();
 		Dimension d = new Dimension(793, 478);
 		setMinimumSize(d);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,61 +75,89 @@ public class GUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		panel.setBorder(null);
 		contentPane.add(panel, BorderLayout.NORTH);
 		FlowLayout fl_panel = new FlowLayout(FlowLayout.CENTER, 5, 5);
 		panel.setLayout(fl_panel);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2);
-		
+
 		JButton button1 = new JButton("CD Hinzuf\u00FCgen");
 		button1.addActionListener(new NewCDListener(this));
 		panel_2.add(button1);
-		
+
 		JButton button2 = new JButton("Song Hinzuf\u00FCgen");
 		button2.addActionListener(new NewSongListener(this));
 		panel_2.add(button2);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
-		
+
 		JButton button4 = new JButton("Eintrag entfernen");
 		button4.addActionListener(new DeleteListener(this));
 		panel_1.add(button4);
-		
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane);
-		
+
 		tree = new JTree();
 		tree.setRootVisible(false);
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("CDs") {
-				{
-				}
+		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("CDs") {
+			{
 			}
-		));
+		}));
 		scrollPane.setViewportView(tree);
-		
+
 		JButton btnMehrInformation = new JButton("Mehr Information");
 		contentPane.add(btnMehrInformation, BorderLayout.SOUTH);
 	}
+/**
+ * Diese Methode wird beim Starten des Programms ausgeführt und soll alle Objekte aus der Datenbank auslesen.
+ */
+	public void update() {
 
-	public TreePath find(DefaultMutableTreeNode root, String s) {
-	    @SuppressWarnings("unchecked")
-	    Enumeration<DefaultMutableTreeNode> e = root.depthFirstEnumeration();
-	    while (e.hasMoreElements()) {
-	        DefaultMutableTreeNode node = e.nextElement();
-	        if (node.toString().equalsIgnoreCase(s)) {
-	            return new TreePath(node.getPath());
-	        }
-	    }
-	    return null;
+		try {
+			for (int i = 0; i < dbm.getCountCD(dbm.getConnection()); i++) {
+				try {
+					CD cd1 = dbm.getCDByID(dbm.getConnection(), i);
+					cdList.add(cd1);
+				} catch (SQLException e) {
+				}
+			}
+		} catch (SQLException e) {
+		}
+
+		String[] s = new String[cdList.size()];
+		for (int i = 0; i < cdList.size(); i++) {
+			try {
+				s[i] = cdList.get(i).getName();
+			} catch (NullPointerException ex) {
+			}
+		}
+		tree = new JTree(s);
+
 	}
-	
+/**
+ * 	Diese Methode dient zum Suchen von einer bestimten TreeNode durch den Namen der Node
+ * @param root Root in der gesucht werden soll
+ * @param s Name der gesuchten TreeNode
+ * @return Die gesuchte Tree Node
+ */
+	public TreePath find(DefaultMutableTreeNode root, String s) {
+		@SuppressWarnings("unchecked")
+		Enumeration<DefaultMutableTreeNode> e = root.depthFirstEnumeration();
+		while (e.hasMoreElements()) {
+			DefaultMutableTreeNode node = e.nextElement();
+			if (node.toString().equalsIgnoreCase(s)) {
+				return new TreePath(node.getPath());
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * @return the tree
 	 */
@@ -154,11 +185,9 @@ public class GUI extends JFrame {
 	public ArrayList<Song> getSongList() {
 		return songList;
 	}
-	
+
 	public DBManager getDbm() {
 		return dbm;
 	}
 
-	
-	
 }
