@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
+import datenbankObjekte.DBManager;
 import datenbankObjekte.Interpret;
 import datenbankObjekte.Song;
 import net.miginfocom.swing.MigLayout;
@@ -37,12 +39,14 @@ public class SongDialog extends JDialog {
 	private JTextField tf_iVorname;
 	private JTextField tf_iNachname;
 	private CD cd;
+	private DBManager dbm;
 
 	/**
 	 * Create the dialog.
 	 */
 	public SongDialog(GUI g) {
 		this.g = g;
+		dbm = g.getDbm();
 		tree = g.getTree();
 		setBounds(100, 100, 476, 289);
 		getContentPane().setLayout(new BorderLayout());
@@ -135,6 +139,11 @@ public class SongDialog extends JDialog {
 						}
 						Interpret i = new Interpret(tf_iNachname.getText(), tf_iVorname.getText());
 						Song s1 = new Song(tf_name.getText(), Double.parseDouble(tf_name.getText()), i, cd);
+						try {
+							dbm.insertSong(dbm.getConnection(), s1);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
 						songList.add(s1);
 						dispose();
 					}

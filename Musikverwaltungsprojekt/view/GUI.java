@@ -17,22 +17,22 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
 import datenbankObjekte.CD;
+import datenbankObjekte.DBManager;
 import datenbankObjekte.Interpret;
 import datenbankObjekte.Song;
+import listener.DeleteListener;
 import listener.NewCDListener;
 import listener.NewSongListener;
-import listener.DeleteListener;
 
 public class GUI extends JFrame {
 
-	/**
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTree tree;
 	private ArrayList<CD> cdList = new ArrayList<>();
 	private ArrayList<Interpret> interpretList = new ArrayList<>();
 	private ArrayList<Song> songList = new ArrayList<>();
+	private DBManager dbm = new DBManager();
 	
 
 	/**
@@ -86,7 +86,7 @@ public class GUI extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1);
 		
-		JButton button4 = new JButton("Entfernen");
+		JButton button4 = new JButton("Eintrag entfernen");
 		button4.addActionListener(new DeleteListener(this));
 		panel_1.add(button4);
 		
@@ -146,6 +146,10 @@ public class GUI extends JFrame {
 	 */
 	public ArrayList<Song> getSongList() {
 		return songList;
+	}
+	
+	public DBManager getDbm() {
+		return dbm;
 	}
 
 	

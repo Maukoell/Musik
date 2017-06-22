@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import datenbankObjekte.CD;
+import datenbankObjekte.DBManager;
 import net.miginfocom.swing.MigLayout;
 
 public class CDDialog extends JDialog {
@@ -30,12 +32,14 @@ public class CDDialog extends JDialog {
 	private JTextField textField_1;
 	private JTextField txtDdmmyyyy;
 	private GUI g;
-
+	private DBManager dbm;
+	
 	/**
 	 * Create the dialog.
 	 */
 	public CDDialog(GUI g) {
 		this.g = g;
+		dbm = g.getDbm();
 		setBounds(100, 100, 476, 233);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,6 +99,12 @@ public class CDDialog extends JDialog {
 						CD c = new CD(textField.getText(), textField_1.getText(), d );
 						ArrayList<CD> cdList = g.getCdList();
 						cdList.add(c);
+						
+						try {
+							dbm.insertCD(dbm.getConnection(), c);
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
 						
 						String[] s = new String[cdList.size()];
 						for (int i = 0; i < cdList.size(); i++) {
