@@ -186,6 +186,11 @@ public class GUI extends JFrame {
 		return songList;
 	}
 
+	/**
+	 * 
+	 * @return the dbm
+	 */
+	
 	public DBManager getDbm() {
 		return dbm;
 	}
