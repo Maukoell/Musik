@@ -63,9 +63,10 @@ public class GUI extends JFrame {
 	/**
 	 * 
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
 	@SuppressWarnings("serial")
-	public GUI() {
+	public GUI() throws SQLException {
 		update();
 		Dimension d = new Dimension(793, 478);
 		setMinimumSize(d);
@@ -116,18 +117,19 @@ public class GUI extends JFrame {
 	}
 /**
  * Diese Methode wird beim Starten des Programms ausgeführt und soll alle Objekte aus der Datenbank auslesen.
+ * @throws SQLException 
  */
-	public void update() {
-
-		try {
-			for (int i = 0; i < dbm.getCountCD(dbm.getConnection()); i++) {
-				try {
-					CD cd1 = dbm.getCDByID(dbm.getConnection(), i);
-					cdList.add(cd1);
-				} catch (SQLException e) {
-				}
+	public void update() throws SQLException {
+		
+		int count = dbm.getCountCD(dbm.getConnection());
+		int[] ids = dbm.getCDIDs(dbm.getConnection());
+		
+		for (int i = ids.length; i < count; i++) {
+			try {
+				CD cd1 = dbm.getCDByID(dbm.getConnection(), ids[i]);
+				cdList.add(cd1);
+			} catch (SQLException e) {
 			}
-		} catch (SQLException e) {
 		}
 
 		String[] s = new String[cdList.size()];

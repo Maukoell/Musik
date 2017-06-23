@@ -113,11 +113,11 @@ public class CDDialog extends JDialog {
 							e1.printStackTrace();
 						}
 						
-						String[] s = new String[cdList.size()];
+						Object[] o = new Object[cdList.size()];
 						for (int i = 0; i < cdList.size(); i++) {
-							s[i] = cdList.get(i).getName();
+							o[i] = cdList.get(i).getName();
 						}
-						JTree tree = new JTree(s);
+						JTree tree = new JTree(o);
 						JTree tree1 = g.getTree();
 						tree1.setModel(tree.getModel());
 						dispose();

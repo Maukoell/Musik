@@ -134,7 +134,7 @@ public class DBManager {
 		CD p = null;
 
 		try {
-			String sql = "Select CDID, Name, Verlag, ErschDatum " + "from CD where CDID = ?";
+			String sql = "Select CDID, Name, Verlag, ErschDatum from CD where CDID = ?";
 			stm = con.prepareStatement(sql);
 			stm.setInt(1, CDID);
 			rs = stm.executeQuery();
@@ -162,6 +162,36 @@ public class DBManager {
 		return p;
 	}
 
+	public int[] getCDIDs(Connection con) throws SQLException {
+		PreparedStatement stm = null;
+		ResultSet rs = null;
+		int[] ids= new int[this.getCountCD(con)];
+		
+		try {
+			String sql = "Select CDID from CD";
+			stm = con.prepareStatement(sql);
+			rs = stm.executeQuery();
+			for (int i = 0; i < this.getCountCD(con); i++) {
+				rs.next();
+				ids[i] = rs.getInt(1);
+			}
+		} finally {/*
+					 * fals eine Exception auftritt werden rs und stm wieder
+					 * geschlossen(aufgeräumt)
+					 */
+			if (rs != null) {
+				rs.close();
+			}
+			if (stm != null) {
+				stm.close();
+			}
+		}
+
+		
+		return ids;
+		
+	}
+	
 	/**
 	 * Diese Methode gibt ein Song Objekt aus der Datenbank zurück, </br>
 	 * welches durch die SongID ausgewählt wird.
@@ -412,7 +442,11 @@ public class DBManager {
 		PreparedStatement stm = null;
 
 		try {
-
+			String sql = "INSERT INTO `interpret` (`InterpretID`, `Nachname`, `Vorname`) VALUES (" + s.getInterpret().getInterpretID()
+					+ ", '" + s.getInterpret().getNachname() + "','" + s.getInterpret().getVorname() + "')";
+			stm = con.prepareStatement(sql);
+			stm.executeUpdate();
+			stm.close();
 			String sql2 = "Insert into Song values" + "(" + s.getSongID() + "," + "'" + s.getSongName() + "'," + " "
 					+ s.getDauer() + " ," + s.getInterpret().getInterpretID() + "," + s.getCd().getCDID() + ")";
 			stm = con.prepareStatement(sql2);

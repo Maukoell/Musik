@@ -40,8 +40,8 @@ public class SongDialog extends JDialog {
 	private JTextField tf_name;
 	private JTextField tf_dauer;
 	private GUI g;
-	private ArrayList<CD> cdList = g.getCdList();
-	private ArrayList<Song> songList = g.getSongList();
+	private ArrayList<CD> cdList;
+	private ArrayList<Song> songList;
 	private JTree tree;
 	private JComboBox<String> comboBox;
 	private JTextField tf_iVorname;
@@ -54,6 +54,8 @@ public class SongDialog extends JDialog {
 	 */
 	public SongDialog(GUI g) {
 		this.g = g;
+		cdList = g.getCdList();
+		songList = g.getSongList();
 		dbm = g.getDbm();
 		tree = g.getTree();
 		setBounds(100, 100, 476, 289);
@@ -99,7 +101,7 @@ public class SongDialog extends JDialog {
 			String[] s = null;
 			s = ls.toArray(new String[0]); 
 			
-	//		comboBox = new JComboBox<String>(s);
+			comboBox = new JComboBox<String>(s);
 			contentPanel.add(comboBox, "cell 1 2,growx");
 		}
 		{
@@ -146,7 +148,7 @@ public class SongDialog extends JDialog {
 							}
 						}
 						Interpret i = new Interpret(tf_iNachname.getText(), tf_iVorname.getText());
-						Song s1 = new Song(tf_name.getText(), Double.parseDouble(tf_name.getText()), i, cd);
+						Song s1 = new Song(tf_name.getText(), Double.parseDouble(tf_dauer.getText()), i, cd);
 						try {
 							dbm.insertSong(dbm.getConnection(), s1);
 						} catch (SQLException e1) {
